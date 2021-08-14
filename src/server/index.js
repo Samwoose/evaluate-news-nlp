@@ -17,8 +17,8 @@ app.get('/', function (req, res) {
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(8082, function () {
-    console.log('Example app listening on port 8082!')
+app.listen(8080, function () {
+    console.log('Example app listening on port 8080!')
 })
 
 app.get('/test', function (req, res) {
@@ -26,14 +26,26 @@ app.get('/test', function (req, res) {
 })
 
 //test purpose
-app.post('/nlp-api', async function(req,res){
+projectData = {};
+app.get('/nlp-api', async function(req,res){
     console.log(urlToAPI)
     const response = await fetch(urlToAPI)
     try{
         const data = await response.json()
         console.log(data)
-        res.send(data)
+        const newEntry = {
+            model : data.model
+        }
+        //Assign the new entry to the object
+        projectData = newEntry ;
+        res.send(projectData);
+        //res.send(data)
     }catch(error){
         console.log("Something went wrong",error)
     }
 })
+
+app.get("/data",(req,res)=>{
+    //returns the projectData object to client when GET request is made
+    res.send(projectData);
+});

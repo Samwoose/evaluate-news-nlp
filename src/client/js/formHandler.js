@@ -6,11 +6,13 @@ function handleSubmit(event) {
     Client.checkForName(formText)
 
     console.log("::: Form Submitted :::")
-    fetch('http://localhost:8082/test')
+    fetch('http://localhost:8080/nlp-api')
     .then(res => res.json())
     .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
+        document.getElementById('results').innerHTML = res.model
+        console.log(res)
     })
+   
 }
 
 export { handleSubmit }
