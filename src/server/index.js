@@ -6,9 +6,18 @@ const fetch = require('node-fetch')
 const dotenv = require('dotenv')
 dotenv.config()
 //Fetch testing purpose 
-const urlToAPI = "https://api.meaningcloud.com/sentiment-2.1?key=" + process.env.API_KEY + "&url=" + "https://www.usatoday.com/restricted/?return=https%3A%2F%2Fwww.usatoday.com%2Fstory%2Fnews%2Fpolitics%2F2021%2F08%2F14%2Ftalibans-afghanistan-advance-tests-bidens-america-back-policy%2F8121040002%2F" + "&lang=en"
 
 const app = express()
+
+/* Middleware*/
+//Here we are configuring express to use body-parser as middle-ware.
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Cors for cross origin allowance
+const cors = require('cors');
+app.use(cors());
 
 app.use(express.static('dist'))
 
@@ -31,19 +40,31 @@ app.get('/test', function (req, res) {
 //test purpose
 projectData = {};
 app.get('/nlp-api', async function(req,res){
-    console.log(urlToAPI)
-    const response = await fetch(urlToAPI)
-    try{
-        const data = await response.json()
-        //console.log(data)
-        const newEntry = {
-            model : data.model
+    //console.log(urlToAPI)
+    if(userUrlInput != ""){
+        const urlToAPI = "https://api.meaningcloud.com/sentiment-2.1?key=" + process.env.API_KEY + "&url=" + userUrlInput + "&lang=en"
+        const response = await fetch(urlToAPI)
+        try{
+            const data = await response.json()
+            //console.log(data)
+            const newEntry = {
+                model : data.model
+            }
+            //Assign the new entry to the object
+            projectData = newEntry ;
+            res.send(projectData);
+            //res.send(data)
+        }catch(error){
+            console.log("Something went wrong",error)
         }
-        //Assign the new entry to the object
-        projectData = newEntry ;
-        res.send(projectData);
-        //res.send(data)
-    }catch(error){
-        console.log("Something went wrong",error)
     }
+    else{
+        console.log("Please provide url that contains an article you want to analyze.")
+    }
+})
+
+let userUrlInput = ""
+app.post('/update-url',(req,res)=>{
+    userUrlInput = req.body.userUrl ;
+    console.log(`This is ${userUrlInput}`)
 })
