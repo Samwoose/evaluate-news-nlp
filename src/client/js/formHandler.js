@@ -10,11 +10,8 @@ const postUserUrlHelper = async (userInputUrl, routeUrl)=>{
         }),
     });
     try{
-        console.log('point0')
         console.log(response.body.userUrl)
-        console.log('point1')
         const newlyFormedUserUrl = await response.json();
-        console.log('point2')
         return newlyFormedUserUrl
     } catch(error){
         console.log("For some reason, could not finish user url POSt request");
