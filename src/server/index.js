@@ -47,8 +47,3 @@ app.get('/nlp-api', async function(req,res){
         console.log("Something went wrong",error)
     }
 })
-
-app.get("/data",(req,res)=>{
-    //returns the projectData object to client when GET request is made
-    res.send(projectData);
-});
