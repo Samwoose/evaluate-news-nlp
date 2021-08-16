@@ -34,20 +34,26 @@ function handleSubmit(event) {
         fetch('http://localhost:8080/nlp-api')
         .then(res => res.json())
         .then(function(res) {
-            //Add analysis results and their designs in view
-            document.getElementById('model').innerHTML = "Model: " + res.model
-            document.getElementById('confidence').innerHTML = "Confidence: " + res.confidence
-            document.getElementById('irony').innerHTML = "Irony: " + res.irony
-            document.getElementById('agreement').innerHTML = "Agreement: " + res.agreement
-            document.getElementById('subjectivity').innerHTML = "Subjective: " + res.subjectivity
-            const resultItems = document.querySelectorAll('.result')
-
-            for(let i = 0 ; i < resultItems.length ; i++){
-                resultItems[i].style.border = "1px solid skyblue"            
-                resultItems[i].style.padding = "20px"
-                resultItems[i].style.fontSize = "20px"
+            //check if the post in the given url can be analized. 
+            if(res.model == undefined){
+                alert("Please, provide url with article or news.")
             }
-            console.log(res)
+            else{
+                //Add analysis results and their designs in view
+                document.getElementById('model').innerHTML = "Model: " + res.model
+                document.getElementById('confidence').innerHTML = "Confidence: " + res.confidence
+                document.getElementById('irony').innerHTML = "Irony: " + res.irony
+                document.getElementById('agreement').innerHTML = "Agreement: " + res.agreement
+                document.getElementById('subjectivity').innerHTML = "Subjective: " + res.subjectivity
+                const resultItems = document.querySelectorAll('.result')
+
+                for(let i = 0 ; i < resultItems.length ; i++){
+                    resultItems[i].style.border = "1px solid skyblue"            
+                    resultItems[i].style.padding = "20px"
+                    resultItems[i].style.fontSize = "20px"
+                }
+                console.log(res)
+            }
         })
     }
     else{
