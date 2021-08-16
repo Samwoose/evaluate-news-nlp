@@ -46,13 +46,18 @@ app.get('/nlp-api', async function(req,res){
         const response = await fetch(urlToAPI)
         try{
             const data = await response.json()
-            //console.log(data)
+            // console.log(data)
             const newEntry = {
-                model : data.model
+                model : data.model,
+                confidence : data.confidence,
+                agreement : data.agreement,
+                irony : data.irony,
+                subjectivity : data.subjectivity,
             }
             //Assign the new entry to the object
             projectData = newEntry ;
             res.send(projectData);
+            
             //res.send(data)
         }catch(error){
             console.log("Something went wrong",error)

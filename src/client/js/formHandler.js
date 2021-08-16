@@ -33,7 +33,16 @@ function handleSubmit(event) {
     fetch('http://localhost:8080/nlp-api')
     .then(res => res.json())
     .then(function(res) {
-        document.getElementById('results').innerHTML = res.model
+        document.getElementById('model').innerHTML = "Model: " + res.model
+        document.getElementById('confidence').innerHTML = "Confidence: " + res.confidence
+        document.getElementById('irony').innerHTML = "Irony: " + res.irony
+        document.getElementById('agreement').innerHTML = "Agreement: " + res.agreement
+        document.getElementById('subjectivity').innerHTML = "Subjective: " + res.subjectivity
+        const resultItems = document.querySelectorAll('.result')
+
+        for(let i = 0 ; i < resultItems.length ; i++){
+            resultItems[i].style.border = "solid"
+        }
         console.log(res)
     })
    
