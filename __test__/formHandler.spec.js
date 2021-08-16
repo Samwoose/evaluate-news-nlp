@@ -1,5 +1,5 @@
 import "@babel/polyfill"
-import { postUserUrlHelper } from "../../src/client/js/formHandler";
+import { postUserUrlHelper } from "../src/client/js/formHandler";
 
 describe("postUserUrlHelper function testing", () => {
 //     test("It should check if newlyFormedUserUrl is created", async () => {

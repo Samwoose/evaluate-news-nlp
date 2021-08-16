@@ -1,4 +1,4 @@
-import { urlValidator } from "../../src/client/js/urlChecker";
+import { urlValidator } from "../src/client/js/urlChecker";
 
 describe("urlValidator function testing", () => {
     test("It should check if the url is valid", () => {
