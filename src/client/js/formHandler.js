@@ -61,7 +61,6 @@ function handleSubmit(event) {
                     resultItems[i].style.padding = "20px"
                     resultItems[i].style.fontSize = "20px"
                 }
-                // console.log(res)
             }
         })
     }

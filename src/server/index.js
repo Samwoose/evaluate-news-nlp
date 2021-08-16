@@ -5,7 +5,6 @@ const fetch = require('node-fetch')
 //Call API key from .env file 
 const dotenv = require('dotenv')
 dotenv.config()
-//Fetch testing purpose 
 
 const app = express()
 
@@ -25,7 +24,6 @@ console.log(__dirname)
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
-    //res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
 // designates what port the app will listen to for incoming requests
@@ -37,16 +35,14 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
-//test purpose
+
 projectData = {};
 app.get('/nlp-api', async function(req,res){
-    //console.log(urlToAPI)
     if(userUrlInput != ""){
         const urlToAPI = "https://api.meaningcloud.com/sentiment-2.1?key=" + process.env.API_KEY + "&url=" + userUrlInput + "&lang=en"
         const response = await fetch(urlToAPI)
         try{
             const data = await response.json()
-            // console.log(data)
             const newEntry = {
                 model : data.model,
                 confidence : data.confidence,
@@ -57,8 +53,6 @@ app.get('/nlp-api', async function(req,res){
             //Assign the new entry to the object
             projectData = newEntry ;
             res.send(projectData);
-            
-            //res.send(data)
         }catch(error){
             console.log("Something went wrong",error)
         }
