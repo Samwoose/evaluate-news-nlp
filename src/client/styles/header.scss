@@ -1,5 +1,16 @@
 header {
-    display: flex;
+    display: flexbox;
     justify-content: space-between;
-    padding: 10px 40px;
+    
+    text-align: center;
+    .logo{
+        background-image: url("../../../img/nlpLogo.png");
+        padding: 100px;
+    }
+    .title{
+        font-size: 40px;
+        color: yellowgreen;
+        padding: 50px;
+    }
 }
+
