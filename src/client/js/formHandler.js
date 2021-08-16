@@ -10,8 +10,10 @@ const postUserUrlHelper = async (userInputUrl, routeUrl)=>{
         }),
     });
     try{
-        console.log(response.body.userUrl)
+        
         const newlyFormedUserUrl = await response.json();
+        console.log(newlyFormedUserUrl);
+        console.log(response.body.userUr)
         return newlyFormedUserUrl
     } catch(error){
         console.log("For some reason, could not finish user url POSt request");
@@ -52,7 +54,7 @@ function handleSubmit(event) {
                     resultItems[i].style.padding = "20px"
                     resultItems[i].style.fontSize = "20px"
                 }
-                console.log(res)
+                // console.log(res)
             }
         })
     }
@@ -62,3 +64,4 @@ function handleSubmit(event) {
 }
 
 export { handleSubmit }
+export { postUserUrlHelper }
