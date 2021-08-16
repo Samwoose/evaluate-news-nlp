@@ -41,7 +41,8 @@ function handleSubmit(event) {
         const resultItems = document.querySelectorAll('.result')
 
         for(let i = 0 ; i < resultItems.length ; i++){
-            resultItems[i].style.border = "solid"
+            resultItems[i].style.border = "1px solid skyblue"            
+            resultItems[i].style.padding = "20px"
         }
         console.log(res)
     })
