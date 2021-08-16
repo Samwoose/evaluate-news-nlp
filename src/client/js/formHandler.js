@@ -24,29 +24,35 @@ function handleSubmit(event) {
 
     // check what text was put into the form field
     let formText = document.getElementById('name').value
-    //Client.checkForName(formText)
+    let valiationResult = Client.checkForName(formText);
     //post user input form text to server
     
-    postUserUrlHelper(formText,'/update-url')
-    
-    console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/nlp-api')
-    .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('model').innerHTML = "Model: " + res.model
-        document.getElementById('confidence').innerHTML = "Confidence: " + res.confidence
-        document.getElementById('irony').innerHTML = "Irony: " + res.irony
-        document.getElementById('agreement').innerHTML = "Agreement: " + res.agreement
-        document.getElementById('subjectivity').innerHTML = "Subjective: " + res.subjectivity
-        const resultItems = document.querySelectorAll('.result')
+    if(valiationResult == true){
+        postUserUrlHelper(formText,'/update-url')
+        
+        console.log("::: Form Submitted :::")
+        fetch('http://localhost:8080/nlp-api')
+        .then(res => res.json())
+        .then(function(res) {
+            //Add analysis results and their designs in view
+            document.getElementById('model').innerHTML = "Model: " + res.model
+            document.getElementById('confidence').innerHTML = "Confidence: " + res.confidence
+            document.getElementById('irony').innerHTML = "Irony: " + res.irony
+            document.getElementById('agreement').innerHTML = "Agreement: " + res.agreement
+            document.getElementById('subjectivity').innerHTML = "Subjective: " + res.subjectivity
+            const resultItems = document.querySelectorAll('.result')
 
-        for(let i = 0 ; i < resultItems.length ; i++){
-            resultItems[i].style.border = "1px solid skyblue"            
-            resultItems[i].style.padding = "20px"
-        }
-        console.log(res)
-    })
-   
+            for(let i = 0 ; i < resultItems.length ; i++){
+                resultItems[i].style.border = "1px solid skyblue"            
+                resultItems[i].style.padding = "20px"
+                resultItems[i].style.fontSize = "20px"
+            }
+            console.log(res)
+        })
+    }
+    else{
+        alert("Please, provide valid URL of news or article.")
+    }
 }
 
 export { handleSubmit }
