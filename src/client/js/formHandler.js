@@ -24,7 +24,7 @@ function handleSubmit(event) {
 
     // check what text was put into the form field
     let formText = document.getElementById('name').value
-    let valiationResult = Client.checkForName(formText);
+    let valiationResult = Client.urlValidator(formText);
     //post user input form text to server
     
     if(valiationResult == true){

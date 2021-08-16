@@ -1,4 +1,4 @@
-function checkForName(userInputUrl) {
+function urlValidator(userInputUrl) {
     // console.log("::: Running checkForName :::", inputText);
     // let names = [
     //     "Picard",
@@ -27,4 +27,4 @@ function checkForName(userInputUrl) {
 // }
 
 // export { checkForName, urlValidater }
-export { checkForName }
+export { urlValidator }
