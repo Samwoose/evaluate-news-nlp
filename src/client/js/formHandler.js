@@ -1,3 +1,9 @@
+/**
+ * Post user input url to the server
+ * @param {string} userInputUrl url that user enters.
+ * @param {string} routeUrl endpoint of route in the server
+ * @return {string} newlyFormedUserUrl correctly reformedly user input url 
+ */
 const postUserUrlHelper = async (userInputUrl, routeUrl)=>{
     const response = await fetch(routeUrl,{
         method:'POST',
@@ -10,7 +16,6 @@ const postUserUrlHelper = async (userInputUrl, routeUrl)=>{
         }),
     });
     try{
-        
         const newlyFormedUserUrl = await response.json();
         console.log(newlyFormedUserUrl);
         return newlyFormedUserUrl
@@ -19,7 +24,10 @@ const postUserUrlHelper = async (userInputUrl, routeUrl)=>{
     }
 }
 
-
+/**
+ * Get analysis information from server and update user interface in the view.
+ * @param {object} event submit event
+ */
 function handleSubmit(event) {
     event.preventDefault()
 
